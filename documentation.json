@@ -1,0 +1,66 @@
+[
+  {
+    "name": "H2ioUi",
+    "comment": "\n# H2ioUi - Ui pieces for H2io apps\n\n## Layout\n@docs createFontStyles, box, heading, text, input\n\n## Logo\n@docs logo, logoSvg\n\n## Button styles\n@docs button, buttonHover, buttonDisabled, buttonLoader\n",
+    "aliases": [],
+    "types": [],
+    "values": [
+      {
+        "name": "box",
+        "comment": "\n  H2io Layout shape\n",
+        "type": "H2ioUi.StandardCss -> Bool -> Html.Html msg -> Html.Html msg"
+      },
+      {
+        "name": "button",
+        "comment": "\n  Button CSS\n",
+        "type": "List Css.Mixin"
+      },
+      {
+        "name": "buttonDisabled",
+        "comment": "\n  Disabled Button CSS\n",
+        "type": "List Css.Mixin"
+      },
+      {
+        "name": "buttonHover",
+        "comment": "\n  Button Inline Hover CSS\n",
+        "type": "H2ioUi.StandardCss"
+      },
+      {
+        "name": "buttonLoader",
+        "comment": "\n  Button Spinner CSS\n",
+        "type": "List Css.Mixin"
+      },
+      {
+        "name": "createFontStyles",
+        "comment": "\n  creates inline `style` elements that bring in the Fira Sans font\n",
+        "type": "H2ioUi.URI -> Html.Html msg"
+      },
+      {
+        "name": "heading",
+        "comment": "\n  Heading CSS\n",
+        "type": "List Css.Mixin"
+      },
+      {
+        "name": "input",
+        "comment": "\n  Input CSS\n",
+        "type": "List Css.Mixin"
+      },
+      {
+        "name": "logo",
+        "comment": "\n  H2io logo in simple text format. Recommended.\n",
+        "type": "Int -> H2ioUi.StandardCss -> Html.Html msg"
+      },
+      {
+        "name": "logoSvg",
+        "comment": "\n  H2io Logo in SVG format\n",
+        "type": "Int -> H2ioUi.StandardCss -> Html.Html msg"
+      },
+      {
+        "name": "text",
+        "comment": "\n  Text CSS\n",
+        "type": "List Css.Mixin"
+      }
+    ],
+    "generated-with-elm-version": "0.18.0"
+  }
+]
