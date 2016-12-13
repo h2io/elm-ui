@@ -88,6 +88,7 @@ contentStyle =
     , display block
     , border3 (px 30) solid (hex "fff")
     , boxSizing borderBox
+    , overflow auto
     , width (pct 100)
     , borderTop zero
     , borderBottom zero
