@@ -74,8 +74,9 @@ createFontStyles uri =
 boxStyle : List Css.Mixin
 boxStyle =
     [ property "all" "initial"
-    , display block
     , boxSizing borderBox
+    , displayFlex
+    , flexDirection column
     , position relative
     , property "z-index" "9"
     ]
@@ -88,6 +89,7 @@ contentStyle =
     , display block
     , border3 (px 30) solid (hex "fff")
     , boxSizing borderBox
+    , flex (num 1)
     , overflow auto
     , width (pct 100)
     , borderTop zero
