@@ -148,6 +148,10 @@ box css showBorder content =
                         , ( "right", "-2px" )
                         , ( "bottom", "-2px" )
                         , ( "top", "-2px" )
+                        , ( "offset-block-end", "-2px" )
+                        , ( "offset-block-start", "-2px" )
+                        , ( "offset-inline-end", "-2px" )
+                        , ( "offset-inline-start", "-2px" )
                         , ( "z-index", "-1" )
                         , ( "opacity", ".45" )
                         ]
@@ -329,6 +333,7 @@ buttonLoader =
     , transform (translate2 (pct -50) (pct -50))
     , display inlineBlock
     , left (px 20)
+    , property "offset-inline-start" "20px"
     , marginTop (px -2)
     , property "will-change" "transform"
     , property "animation" "rotate 1s linear infinite"
