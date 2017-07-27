@@ -32,6 +32,7 @@ import Html.Attributes exposing (style)
 import Svg
 import Svg.Attributes exposing (d)
 import Html.CssHelpers as CssHelpers
+import Html.Styles exposing (..)
 
 
 fontStyles : String -> String
@@ -71,64 +72,64 @@ createFontStyles uri =
     CssHelpers.style (fontStyles uri)
 
 
-boxStyle : List Css.Mixin
+boxStyle : StandardCss
 boxStyle =
-    [ property "all" "initial"
-    , boxSizing borderBox
-    , displayFlex
-    , flexDirection column
-    , position relative
-    , property "z-index" "9"
+    [ ( "all", "initial" )
+    , ( "box-sizing", "border-box" )
+    , ( "display", "flex" )
+    , ( "flex-direction", "column" )
+    , ( "position", "relative" )
+    , ( "z-index", "9" )
     ]
 
 
-contentStyle : List Css.Mixin
+contentStyle : StandardCss
 contentStyle =
-    [ property "all" "initial"
-    , backgroundColor (hex "fff")
-    , display block
-    , border3 (px 30) solid (hex "fff")
-    , boxSizing borderBox
-    , flex (num 1)
-    , overflow auto
-    , width (pct 100)
-    , borderTop zero
-    , borderBottom zero
+    [ ( "all", "initial" )
+    , ( "background-color", "#fff" )
+    , ( "display", "block" )
+    , ( "border", "30px solid  #fff" )
+    , ( "box-sizing", "border-box" )
+    , ( "flex", "1" )
+    , ( "overflow", "auto" )
+    , ( "width", "100%" )
+    , ( "border-top", "0" )
+    , ( "border-bottom", "0" )
     ]
 
 
-clipTopLeft : List Css.Mixin
+clipTopLeft : StandardCss
 clipTopLeft =
-    [ property "all" "initial"
-    , border (px 30)
-    , borderTop zero
-    , borderColor (hex "fff")
-    , borderStyle solid
-    , boxSizing borderBox
-    , display block
-    , width (pct 100)
-    , height zero
-    , borderLeftColor transparent
+    [ ( "all", "initial" )
+    , ( "border", "30px" )
+    , ( "border-top", "0" )
+    , ( "border-color", "#fff" )
+    , ( "border-style", "solid" )
+    , ( "box-sizing", "border-box" )
+    , ( "display", "block" )
+    , ( "width", "100%" )
+    , ( "height", "0" )
+    , ( "border-left-color", "transparent" )
     ]
 
 
-clipBottomRight : List Css.Mixin
+clipBottomRight : StandardCss
 clipBottomRight =
-    [ property "all" "initial"
-    , border (px 30)
-    , borderColor (hex "fff")
-    , borderStyle solid
-    , display block
-    , boxSizing borderBox
-    , width (pct 100)
-    , height zero
-    , borderBottom zero
-    , borderRightColor transparent
+    [ ( "all", "initial" )
+    , ( "border", "30px" )
+    , ( "border-bottom", "0" )
+    , ( "border-color", "#fff" )
+    , ( "border-style", "solid" )
+    , ( "box-sizing", "border-box" )
+    , ( "display", "block" )
+    , ( "width", "100%" )
+    , ( "height", "0" )
+    , ( "border-right-color", "transparent" )
     ]
 
 
-styles : List Css.Mixin -> Html.Attribute msg
-styles =
+styl : List Css.Mixin -> Html.Attribute msg
+styl =
     Css.asPairs >> style
 
 
@@ -141,7 +142,7 @@ box css showBorder content =
         borderBox =
             if showBorder then
                 div
-                    [ style
+                    [ styles
                         [ ( "all", "initial" )
                         , ( "position", "absolute" )
                         , ( "left", "-2px" )
@@ -155,50 +156,54 @@ box css showBorder content =
                         , ( "z-index", "-1" )
                         , ( "opacity", ".45" )
                         ]
+                        []
                     ]
                     [ div
                         [ styles
                             (clipTopLeft
-                                ++ [ border (px 31)
-                                   , borderColor (hex "005a81")
-                                   , borderLeftColor transparent
-                                   , borderTop zero
-                                   , width (pct 100)
+                                ++ [ ( "border", "31px" )
+                                   , ( "border-color", "#005a81" )
+                                   , ( "borderleft-color", "transparent" )
+                                   , ( "border-top", "0" )
+                                   , ( "width", "100%" )
                                    ]
                             )
+                            []
                         ]
                         []
                     , div
                         [ styles
-                            [ all initial
-                            , display block
-                            , property "height" "calc( 100% - 62px )"
-                            , backgroundColor (hex "005a81")
-                            , width (pct 100)
+                            [ ( "all", "initial" )
+                            , ( "display", "block" )
+                            , ( "height", "calc( 100% - 62px )" )
+                            , ( "background-color", "#005a81" )
+                            , ( "width", "100%" )
                             ]
+                            []
                         ]
                         []
                     , div
                         [ styles
                             (clipBottomRight
-                                ++ [ border (px 31)
-                                   , borderColor (hex "005a81")
-                                   , borderRightColor transparent
-                                   , borderBottom zero
-                                   , width (pct 100)
+                                ++ [ ( "border", "31px" )
+                                   , ( "border-color", "#005a81" )
+                                   , ( "border-right-color", "transparent" )
+                                   , ( "border-bottom", "0" )
+                                   , ( "width", "100%" )
                                    ]
                             )
+                            []
                         ]
                         []
                     ]
             else
                 div [] []
     in
-        div [ styles boxStyle, style css ]
+        div [ styles boxStyle [], style css ]
             [ borderBox
-            , span [ styles clipTopLeft ] []
-            , div [ styles contentStyle ] [ content ]
-            , span [ styles clipBottomRight ] []
+            , span [ styles clipTopLeft [] ] []
+            , div [ styles contentStyle [] ] [ content ]
+            , span [ styles clipBottomRight [] ] []
             ]
 
 
@@ -236,14 +241,15 @@ logo : Int -> StandardCss -> Html msg
 logo size css =
     strong
         [ styles
-            [ all initial
-            , fontFamilies [ qt ("Fira Sans"), "sans-serif" ]
-            , fontSize (px (toFloat size))
-            , fontWeight bold
-            , color (hex "379ac4")
-            , display inlineBlock
-            , lineHeight (num 1.3)
+            [ ( "all", "initial" )
+            , ( "font-family", "'Fira Sans', sans-serif" )
+            , ( "font-size", (toString (toFloat size) ++ "px") )
+            , ( "font-weight", "bold" )
+            , ( "color", "#379ac4" )
+            , ( "display", "inline-block" )
+            , ( "line-height", "1.3" )
             ]
+            []
         , style css
         ]
         [ Html.text "[±]" ]
@@ -252,44 +258,44 @@ logo size css =
 {-|
   Heading CSS
 -}
-heading : List Css.Mixin
+heading : StandardCss
 heading =
-    [ all initial
-    , displayFlex
-    , margin3 (px 10) zero (px 25)
-    , fontFamilies [ qt ("Fira Sans"), "sans-serif" ]
-    , fontSize (px 28)
-    , fontWeight bold
-    , color (hex "464b4d")
-    , textAlign center
-    , flexWrap wrap
-    , property "justify-content" "center"
+    [ ( "all", "initial" )
+    , ( "display", "flex" )
+    , ( "margin", "10px 0 25px" )
+    , ( "font-family", "'Fira Sans', sans-serif" )
+    , ( "font-size", "28px" )
+    , ( "font-weight", "bold" )
+    , ( "color", "#464b4d" )
+    , ( "text-align", "center" )
+    , ( "flex-wrap", "wrap" )
+    , ( "justify-content", "center" )
     ]
 
 
 {-|
   Button CSS
 -}
-button : List Css.Mixin
+button : StandardCss
 button =
-    [ all initial
-    , backgroundColor (hex "008ac5")
-    , property "background" "linear-gradient( to bottom, #0096d6 0%, #008ac5 50%, #008ac5 50%, #007eb4 100% )"
-    , border3 (px 1) solid (hex "007eb4")
-    , borderRadius (px 6)
-    , display inlineBlock
-    , boxSizing borderBox
-    , cursor pointer
-    , color (hex "fcfcfc")
-    , fontFamilies [ (qt "Fira Sans"), "sans-serif" ]
-    , fontSize (px 16)
-    , padding (px 10)
-    , textAlign center
-    , fontWeight bold
-    , textDecoration none
-    , position relative
-    , verticalAlign textBottom
-    , property "background-size" "100% 200%"
+    [ ( "all", "initial" )
+    , ( "background-color", "#008ac5" )
+    , ( "background", "linear-gradient( to bottom, #0096d6 0%, #008ac5 50%, #008ac5 50%, #007eb4 100% )" )
+    , ( "border", "1px solid #007eb4" )
+    , ( "borderRadius", "6px" )
+    , ( "display", "inline-block" )
+    , ( "box-sizing", "border-box" )
+    , ( "cursor", "pointer" )
+    , ( "color", "#fcfcfc" )
+    , ( "font-family", "'Fira Sans', sans-serif" )
+    , ( "font-size", "16px" )
+    , ( "padding", "10px" )
+    , ( "text-align", "center" )
+    , ( "font-weight", "bold" )
+    , ( "text-decoration", "none" )
+    , ( "position", "relative" )
+    , ( "vertical-align", "text-bottom" )
+    , ( "background-size", "100% 200%" )
     ]
 
 
@@ -306,70 +312,70 @@ buttonHover =
 {-|
   Disabled Button CSS
 -}
-buttonDisabled : List Css.Mixin
+buttonDisabled : StandardCss
 buttonDisabled =
-    [ all initial
-    , opacity (num 0.6)
-    , cursor default
-    , paddingLeft (px 40)
-    , property "transition" "padding .2s ease"
+    [ ( "all", "initial" )
+    , ( "opacity", "0.6" )
+    , ( "cursor", "default" )
+    , ( "padding-left", "40px" )
+    , ( "transition", "padding .2s ease" )
     ]
 
 
 {-|
   Button Spinner CSS
 -}
-buttonLoader : List Css.Mixin
+buttonLoader : StandardCss
 buttonLoader =
-    [ all initial
-    , position absolute
-    , width (px 20)
-    , height (px 20)
-    , boxSizing borderBox
-    , border3 (px 2) solid (hex "fcfcfc")
-    , borderRightColor transparent
-    , top (pct 50)
-    , borderRadius (pct 50)
-    , transform (translate2 (pct -50) (pct -50))
-    , display inlineBlock
-    , left (px 20)
-    , property "offset-inline-start" "20px"
-    , marginTop (px -2)
-    , property "will-change" "transform"
-    , property "animation" "rotate 1s linear infinite"
+    [ ( "all", "initial" )
+    , ( "position", "absolute" )
+    , ( "width", "20px" )
+    , ( "height", "20px" )
+    , ( "box-sizing", "border-box" )
+    , ( "border", "2px solid #fcfcfc" )
+    , ( "border-right-color", "transparent" )
+    , ( "top", "50%" )
+    , ( "border-radius", "50%" )
+    , ( "transform", "translate -50% -50%" )
+    , ( "display", "inline-block" )
+    , ( "left", "20px" )
+    , ( "offset-inline-start", "20px" )
+    , ( "margin-top", "-2px" )
+    , ( "will-change", "transform" )
+    , ( "animation", "rotate 1s linear infinite" )
     ]
 
 
 {-|
   Input CSS
 -}
-input : List Css.Mixin
+input : StandardCss
 input =
-    [ all initial
-    , display block
-    , boxSizing borderBox
-    , fontFamilies [ (qt "Fira Sans"), "sans-serif" ]
-    , border3 (px 1) solid (hex "b5b9bb")
-    , fontSize (px 16)
-    , fontWeight bold
-    , marginRight (px 10)
-    , padding (px 10)
-    , flex3 zero (int 1) (pct 10)
-    , flexFlow2 wrap column
+    [ ( "all", "initial" )
+    , ( "display", "block" )
+    , ( "box-sizing", "border-box" )
+    , ( "font-family", "'Fira Sans', sans-serif" )
+    , ( "border", "1px solid #b5b9bb" )
+    , ( "font-size", "16px" )
+    , ( "font-weight", "bold" )
+    , ( "margin-right", "10px" )
+    , ( "padding", "10px" )
+    , ( "flex", "0 1 10%" )
+    , ( "flex-flow", "wrap column" )
     ]
 
 
 {-|
   Text CSS
 -}
-text : List Css.Mixin
+text : StandardCss
 text =
-    [ all initial
-    , display block
-    , margin3 (em 1) zero (em 0.1)
-    , fontFamilies [ (qt "Fira Sans"), "sans-serif" ]
-    , fontSize (px 14)
-    , color (hex "464b4d")
-    , textAlign center
-    , width (pct 100)
+    [ ( "all", "initial" )
+    , ( "display", "block" )
+    , ( "margin", "1em 0 0.1em" )
+    , ( "font-family", "'Fira Sans', sans-serif" )
+    , ( "font-size", "14px" )
+    , ( "color", "#464b4d" )
+    , ( "text-align", "center" )
+    , ( "width", "100%" )
     ]
