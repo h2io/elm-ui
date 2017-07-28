@@ -26,7 +26,6 @@ module H2ioUi
 @docs button, buttonHover, buttonDisabled, buttonLoader
 -}
 
-import Css exposing (..)
 import Html exposing (div, Html, span, strong)
 import Html.Attributes exposing (style)
 import Svg
@@ -126,11 +125,6 @@ clipBottomRight =
     , ( "height", "0" )
     , ( "border-right-color", "transparent" )
     ]
-
-
-styl : List Css.Mixin -> Html.Attribute msg
-styl =
-    Css.asPairs >> style
 
 
 {-|
