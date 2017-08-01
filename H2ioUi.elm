@@ -276,7 +276,7 @@ button =
     , ( "background-color", "#008ac5" )
     , ( "background", "linear-gradient( to bottom, #0096d6 0%, #008ac5 50%, #008ac5 50%, #007eb4 100% )" )
     , ( "border", "1px solid #007eb4" )
-    , ( "borderRadius", "6px" )
+    , ( "border-radius", "6px" )
     , ( "display", "inline-block" )
     , ( "box-sizing", "border-box" )
     , ( "cursor", "pointer" )
