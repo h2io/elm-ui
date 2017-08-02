@@ -193,7 +193,7 @@ box css showBorder content =
             else
                 div [] []
     in
-        div [ styles boxStyle [], style css ]
+        div [ styles (boxStyle ++ css) [] ]
             [ borderBox
             , span [ styles clipTopLeft [] ] []
             , div [ styles contentStyle [] ] [ content ]
