@@ -157,8 +157,9 @@ box css showBorder content =
                             (clipTopLeft
                                 ++ [ ( "border", "31px" )
                                    , ( "border-color", "#005a81" )
-                                   , ( "borderleft-color", "transparent" )
+                                   , ( "border-left-color", "transparent" )
                                    , ( "border-top", "0" )
+                                   , ( "border-style", "solid" )
                                    , ( "width", "100%" )
                                    ]
                             )
@@ -169,7 +170,7 @@ box css showBorder content =
                         [ styles
                             [ ( "all", "initial" )
                             , ( "display", "block" )
-                            , ( "height", "calc( 100% - 62px )" )
+                            , ( "height", "calc(100% - 62px)" )
                             , ( "background-color", "#005a81" )
                             , ( "width", "100%" )
                             ]
@@ -183,6 +184,7 @@ box css showBorder content =
                                    , ( "border-color", "#005a81" )
                                    , ( "border-right-color", "transparent" )
                                    , ( "border-bottom", "0" )
+                                   , ( "border-style", "solid" )
                                    , ( "width", "100%" )
                                    ]
                             )
