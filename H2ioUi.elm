@@ -153,17 +153,15 @@ box css showBorder content =
                         []
                     ]
                     [ div
-                        [ styles
-                            (clipTopLeft
-                                ++ [ ( "border", "31px" )
-                                   , ( "border-color", "#005a81" )
-                                   , ( "border-left-color", "transparent" )
-                                   , ( "border-top", "0" )
-                                   , ( "border-style", "solid" )
-                                   , ( "width", "100%" )
-                                   ]
-                            )
-                            []
+                        [ styles clipTopLeft []
+                        , style
+                            [ ( "border", "31px #005a81 solid" )
+                            , ( "border-color", "#005a81" )
+                            , ( "border-left-color", "transparent" )
+                            , ( "border-top", "0" )
+                            , ( "border-style", "solid" )
+                            , ( "width", "100%" )
+                            ]
                         ]
                         []
                     , div
@@ -178,17 +176,15 @@ box css showBorder content =
                         ]
                         []
                     , div
-                        [ styles
-                            (clipBottomRight
-                                ++ [ ( "border", "31px" )
-                                   , ( "border-color", "#005a81" )
-                                   , ( "border-right-color", "transparent" )
-                                   , ( "border-bottom", "0" )
-                                   , ( "border-style", "solid" )
-                                   , ( "width", "100%" )
-                                   ]
-                            )
-                            []
+                        [ styles clipBottomRight []
+                        , style
+                            [ ( "border", "31px" )
+                            , ( "border-color", "#005a81" )
+                            , ( "border-right-color", "transparent" )
+                            , ( "border-bottom", "0" )
+                            , ( "border-style", "solid" )
+                            , ( "width", "100%" )
+                            ]
                         ]
                         []
                     ]
